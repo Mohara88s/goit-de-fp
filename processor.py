@@ -46,3 +46,23 @@ print(table_athlete_bio.count())
 # Зчитати дані з результатами змагань з Kafka-топіку athlete_event_results.
 # Дані з json-формату необхідно перевести в dataframe-формат, де кожне поле json є окремою колонкою.
 
+table_athlete_event_results = (spark.read.format('jdbc').options(
+    url=jdbc_url,
+    driver='com.mysql.cj.jdbc.Driver',  # com.mysql.jdbc.Driver
+    dbtable=jdbc_table_athlete_event_results,
+    user=jdbc_user,
+    password=jdbc_password)
+    .load())
+
+table_athlete_event_results.limit(10).show()
+print(table_athlete_event_results.count())
+
+# Визначення схеми для JSON
+schema = StructType(
+    [
+        StructField("athlete_id", IntegerType(), True),
+        StructField("sport", StringType(), True),
+        StructField("medal", StringType(), True),
+        StructField("timestamp", StringType(), True),
+    ]
+)

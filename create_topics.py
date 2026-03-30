@@ -14,7 +14,7 @@ admin_client = KafkaAdminClient(
 my_name = "vitalii_vasylets"
 topic_names = [
     f'{my_name}_athlete_event_results',
-    f'{my_name}_athlete_avgs'
+    f'{my_name}_athlete_enriched_agg'
 ]
 num_partitions = 2
 replication_factor = 1
